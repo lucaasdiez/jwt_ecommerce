@@ -9,7 +9,7 @@ import java.util.List;
 public interface ImagenService {
     Imagen getImagen(Integer id);
     void deleteImagen(Integer id);
-    List<ImagenDTO> saveImagen(List<MultipartFile> file, Integer idProducto);
+    List<ImagenDTO> saveImagen(List<MultipartFile> imagenes, Integer idProducto);
     void updateImagen(Integer id, MultipartFile file);
 
 }

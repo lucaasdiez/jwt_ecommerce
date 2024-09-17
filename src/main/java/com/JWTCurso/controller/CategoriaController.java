@@ -7,7 +7,6 @@ import com.JWTCurso.response.ApiResponse;
 import com.JWTCurso.service.categoria.CategoriaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

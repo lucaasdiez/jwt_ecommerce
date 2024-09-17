@@ -23,6 +23,5 @@ public class Imagen {
 
     @ManyToOne
     @JoinColumn(name = "producto_id")
-    @JsonBackReference
     private Producto producto;
 }

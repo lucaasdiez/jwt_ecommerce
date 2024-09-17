@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.sql.rowset.serial.SerialBlob;
-import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -37,25 +36,25 @@ public class ImagenServiceImp implements ImagenService {
     }
 
     @Override
-    public List<ImagenDTO> saveImagen(List<MultipartFile> files, Integer idProducto) {
+    public List<ImagenDTO> saveImagen(List<MultipartFile> archivos, Integer idProducto) {
         Producto producto = productoService.getProductoById(idProducto);
 
         List<ImagenDTO> savedImagenDTO = new ArrayList<>();
 
-        for (MultipartFile file : files) {
+        for (MultipartFile archivo : archivos) {
             try {
                 Imagen imagen = new Imagen();
-                imagen.setArchivoNombre(file.getOriginalFilename());
-                imagen.setArchivoTipo(file.getContentType());
-                imagen.setImagen(new SerialBlob(file.getBytes()));
+                imagen.setArchivoNombre(archivo.getOriginalFilename());
+                imagen.setArchivoTipo(archivo.getContentType());
+                imagen.setImagen(new SerialBlob(archivo.getBytes()));
                 imagen.setProducto(producto);
 
-                String buildDescargaURL = "/api/v1/imagenes/imagen/download/";
-                String descargaURL = buildDescargaURL + imagen.getId();
+                String buildDescargaURL = "/api/v1/imagenes/imagen/descargar/";
+                String descargaURL = buildDescargaURL+imagen.getId();
                 imagen.setDescargaURL(descargaURL);
                 Imagen saveImagen = imagenRepository.save(imagen);
 
-                saveImagen.setDescargaURL(buildDescargaURL + saveImagen.getId());
+                saveImagen.setDescargaURL(buildDescargaURL+saveImagen.getId());
                 imagenRepository.save(saveImagen);
 
                 ImagenDTO imagenDTO = new ImagenDTO();

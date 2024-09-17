@@ -1,6 +1,6 @@
 package com.JWTCurso.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -29,7 +29,6 @@ public class Producto {
     private Categoria categoria;
 
     @OneToMany(mappedBy = "producto")
-    @JsonManagedReference
     private List<Imagen> imagenes;
 
     public Producto(String nombre, String marca, BigDecimal precio,int stock, String descripcion, Categoria categoria) {

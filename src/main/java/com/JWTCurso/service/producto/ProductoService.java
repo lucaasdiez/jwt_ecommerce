@@ -21,4 +21,7 @@ public interface ProductoService {
     List<Producto> getProductoByNombreAndMarca(String nombre, String marca);
     Long contarProductosPorMarcaAndNombre(String marca, String nombre);
 
+    List<ProductoDTO> getProductosDTO(List<Producto> productos);
+    ProductoDTO convertirProductoToProductoDTO(Producto producto);
+
 }

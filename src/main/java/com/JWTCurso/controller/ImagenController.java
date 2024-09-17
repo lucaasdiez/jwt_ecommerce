@@ -5,6 +5,7 @@ import com.JWTCurso.exeptions.ResourceNotFoundException;
 import com.JWTCurso.model.Imagen;
 import com.JWTCurso.response.ApiResponse;
 import com.JWTCurso.service.imagen.ImagenService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
@@ -37,11 +38,12 @@ public class ImagenController {
     }
 
     @GetMapping("/imagen/descargar/{idImagen}")
+    @Transactional
     public ResponseEntity<Resource> descargarImagen(@PathVariable Integer idImagen) throws SQLException {
         Imagen imagen = imagenService.getImagen(idImagen);
-        ByteArrayResource byteArrayResource = new ByteArrayResource(imagen.getImagen().getBytes(1, (int) imagen.getImagen().length() ));
+        ByteArrayResource byteArrayResource = new ByteArrayResource(imagen.getImagen().getBytes(1, (int) imagen.getImagen().length()));
         return ResponseEntity.ok().contentType(MediaType.parseMediaType(imagen.getArchivoTipo()))
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + imagen.getArchivoNombre() + "\"")
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" +imagen.getArchivoNombre()+ "\"")
                 .body(byteArrayResource);
     }
 

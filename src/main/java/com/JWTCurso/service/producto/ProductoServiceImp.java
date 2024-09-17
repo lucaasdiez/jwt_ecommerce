@@ -1,14 +1,19 @@
 package com.JWTCurso.service.producto;
 
+import com.JWTCurso.dto.ImagenDTO;
 import com.JWTCurso.dto.ProductoDTO;
 import com.JWTCurso.exeptions.ResourceNotFoundException;
 import com.JWTCurso.model.Categoria;
+import com.JWTCurso.model.Imagen;
 import com.JWTCurso.model.Producto;
 import com.JWTCurso.repository.CategoriaRepository;
+import com.JWTCurso.repository.ImagenRepository;
 import com.JWTCurso.repository.ProductoRepository;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.awt.*;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +22,8 @@ import java.util.Optional;
 public class ProductoServiceImp implements ProductoService{
     private final ProductoRepository productoRepository;
     private final CategoriaRepository categoriaRepository;
+    private final ModelMapper modelMapper;
+    private final ImagenRepository imagenRepository;
 
     @Override
     public Producto getProductoById(Integer id) {
@@ -106,5 +113,20 @@ public class ProductoServiceImp implements ProductoService{
     @Override
     public Long contarProductosPorMarcaAndNombre(String marca, String nombre) {
         return productoRepository.countProductoByMarcaAndNombre(marca, nombre);
+    }
+
+    @Override
+    public List<ProductoDTO> getProductosDTO(List<Producto> productos) {
+        return productos.stream().map(this::convertirProductoToProductoDTO).toList();
+    }
+
+    public ProductoDTO convertirProductoToProductoDTO(Producto producto) {
+        ProductoDTO productoDTO= modelMapper.map(producto, ProductoDTO.class);
+        List<Imagen> imagenes= imagenRepository.findByProductoId(producto.getId());
+        List<ImagenDTO> imagenDTOs= imagenes.stream()
+                .map(imagen -> modelMapper.map(imagenes, ImagenDTO.class))
+                .toList();
+        productoDTO.setImagenes(imagenDTOs);
+        return productoDTO;
     }
 }
