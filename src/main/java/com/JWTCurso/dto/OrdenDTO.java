@@ -1,8 +1,6 @@
 package com.JWTCurso.dto;
 
 import com.JWTCurso.enums.OrdenEstado;
-import com.JWTCurso.model.ItemOrden;
-import com.JWTCurso.model.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,10 +1,8 @@
 package com.JWTCurso.dto;
 
-import com.JWTCurso.model.Carrito;
-import com.JWTCurso.model.Orden;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
