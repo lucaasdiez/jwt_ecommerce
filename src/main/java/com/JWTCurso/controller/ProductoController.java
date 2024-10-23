@@ -7,6 +7,7 @@ import com.JWTCurso.response.ApiResponse;
 import com.JWTCurso.service.producto.ProductoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,6 +39,7 @@ public class ProductoController {
         }
     }
 
+    @PreAuthorize("hasRole('ROL_ADMIN')")
     @PostMapping("/agregar")
     public ResponseEntity<ApiResponse> addProducto(@RequestBody ProductoDTO producto) {
         try {
@@ -49,6 +51,7 @@ public class ProductoController {
         }
     }
 
+    @PreAuthorize("hasRole('ROL_ADMIN')")
     @PutMapping("/producto/{id}/update")
     public ResponseEntity<ApiResponse> updateProducto(@PathVariable Integer id, @RequestBody ProductoDTO producto) {
         try {
@@ -60,6 +63,7 @@ public class ProductoController {
         }
     }
 
+    @PreAuthorize("hasRole('ROL_ADMIN')")
     @DeleteMapping("/producto/{id}/delete")
     public ResponseEntity<ApiResponse> deleteProducto(@PathVariable Integer id) {
         try {
