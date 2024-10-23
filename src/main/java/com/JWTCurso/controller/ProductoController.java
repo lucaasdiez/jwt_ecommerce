@@ -60,7 +60,7 @@ public class ProductoController {
         }
     }
 
-    @DeleteMapping("/producto/id/delete")
+    @DeleteMapping("/producto/{id}/delete")
     public ResponseEntity<ApiResponse> deleteProducto(@PathVariable Integer id) {
         try {
             productoService.deleteProductoById(id);

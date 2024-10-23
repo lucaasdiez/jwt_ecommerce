@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.awt.*;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -124,7 +124,7 @@ public class ProductoServiceImp implements ProductoService{
         ProductoDTO productoDTO= modelMapper.map(producto, ProductoDTO.class);
         List<Imagen> imagenes= imagenRepository.findByProductoId(producto.getId());
         List<ImagenDTO> imagenDTOs= imagenes.stream()
-                .map(imagen -> modelMapper.map(imagenes, ImagenDTO.class))
+                .map(imagen -> modelMapper.map(imagen, ImagenDTO.class))
                 .toList();
         productoDTO.setImagenes(imagenDTOs);
         return productoDTO;
